@@ -8,16 +8,7 @@
 ## CL Format Rules
 
 - Cover letter with resume: 1 page (250-300 words)
-- Cover letter with CV: 1-2 pages (350-450 words). If 2 pages, page 2 >= half filled before signature.
-- Full package: Resume + CL = 3 pages | CV + CL = 6-7 pages
-
----
-
-## Institution Type Detection
-
-- **Industry:** Any company (manufacturing, tech, consulting, energy, etc.)
-- **National Lab:** DOE labs, national research facilities, government lab fellowships
-- **Academic:** University postdoc or faculty positions
+- Full package: Resume + CL = 2 pages
 
 ---
 
@@ -28,30 +19,6 @@
 **P2 — EVIDENCE:** 2-3 achievements translated to business value. Max 3-4 quantified claims. Mirror JD terms. Frame as deliverables.
 
 **P3 — CLOSING:** Forward-looking value + active call to action. Address "why industry" positively if pivoting — frame what industry enables, not what academia lacks.
-
----
-
-## NATIONAL LAB Cover Letter (350-450 words, 4 paragraphs)
-
-**P1 — HOOK:** Mission alignment + division/group + position. Reference specific programmatic thrust or group's publication. Technical vocabulary OK.
-
-**P2 — CURRENT POSITION:** Current work with mission framing. Theory-experiment bridge. HPC scale. Collaborative tone.
-
-**P3 — PRIOR WORK:** Transferable methodology arc. Custom tools → ML infrastructure. International collaboration. Quantify.
-
-**P4 — CLOSING:** Programmatic vision + collaboration offer + seminar availability. Lab vocabulary: "thrust area," "programmatic direction."
-
----
-
-## ACADEMIC Cover Letter (350-450 postdoc, 450-650 faculty; 4 paragraphs)
-
-**P1 — HOOK:** Connection to PI's specific paper + your identity + position. Name the PI.
-
-**P2 — CURRENT RESEARCH:** Current position with field-context framing (use significance files if available). Future direction: 1-2 sentences MANDATORY.
-
-**P3 — PRIOR FOUNDATION:** Transferable methodology + collaboration + mentorship. Faculty: departmental fit narrative.
-
-**P4 — CLOSING:** Forward-looking + name 2-3 faculty for collaboration. Postdoc: "contribute to your research program." Faculty: "build independent research program complementing..."
 
 ---
 
@@ -68,29 +35,28 @@
 
 ## Jargon Calibration
 
-- **Industry:** Assume HR reads first. Minimize subfield jargon.
-- **National Lab / Academic:** Domain expert reads. Use field vocabulary.
+- **Industry:** Assume HR reads first (P1). Domain expert reads P2-P3 (use more technical vocabulary). Minimize buzz-words.
 
 ---
 
 ## Package Reading Rules
 
-- Resume/CV must stand alone — many hiring managers never read the CL
-- CL deepens, not introduces — every major CL claim traceable to a resume/CV bullet
+- Resume must stand alone — many hiring managers never read the CL
+- CL deepens, not introduces — every major CL claim traceable to a resume bullet
 - No contradictions between documents
-- Resume + CL = 3 pages | CV + CL = 6-7 pages
+- Resume + CL = 2 pages
 
 ---
 
 ## CL Hook Verification (MANDATORY)
 
 Before presenting any CL draft to the user, web-search and verify every external reference:
-- **Academic:** PI name + cited paper title/topic → confirm paper exists, journal, year
-- **National Lab:** Named program, thrust area, or group publication → confirm it exists
-- **Industry:** Product name, technology claim, or company news → confirm accuracy
+- Product name, technology claim, company news → confirm accuracy
+- Company's recent engineering blog posts, products, technical talks → confirm they exist
+- Job title, team name, or quoted initiative → confirm
 
 **If verified:** Note source URL in session file Cover Letter Plan.
-**If unverified:** Flag as **"UNVERIFIED — please confirm"** in the draft. Never guess names, titles, or journal details.
+**If unverified:** Flag as **"UNVERIFIED — please confirm"** in the draft. Never guess company details.
 
 ---
 

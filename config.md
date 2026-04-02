@@ -6,40 +6,33 @@
 
 ## Personal Info
 
-- **Name:** [Your Full Name]
-- **Degree suffix:** [e.g., Ph.D., M.S., or leave blank]
-- **Email:** [your@email.com]
-- **Phone:** [+1 XXXXXXXXXX]
-- **Location:** [City, State ZIP]
-- **LinkedIn:** [URL or leave blank]
-- **Google Scholar:** [URL or leave blank]
-- **ORCID:** [URL or leave blank]
-- **Website:** [URL or leave blank]
+- **Name:** Bhargav Ram Kodakandla
+- **Email:** bhargavkodakandla@gmail.com
+- **Phone:** +1 (407) 388-4585
+- **Location:** (To be added later)
+- **LinkedIn:** https://www.linkedin.com/in/bhargav-ram-reddy-kodakandla/
+- **GitHub:** https://github.com/bhargavram0211/
+- **Website:** (none)
 
 ---
 
 ## Document Preferences
 
-- **Resume pages:** 2
-- **CV pages:** 5
+- **Resume pages:** 1
 - **Resume bullet variant:** 2L (all variable bullets are 2-line)
-- **CV bullet variant:** 2L/3L mix
-- **Skills config (resume):** 4-3-2-2-2 (13 lines, 5 groups)
-- **Skills config (CV):** 4-4-3-3-3 (17 lines, 5 groups)
-- **Immigration line:** Yes | "Authorized to work in the United States"
+- **Skills config (resume):** 4-3-2-2 (11 lines, 4 groups)
+- **Immigration line:** Yes | "Authorized to work in the United States" (delete this line if not needed)
 
 ---
 
-## Provenance Flags
+## Accuracy Tracking
 
-Track the publication status of your work. Skills check this table before every output.
+For any work achievements, verify the following before adding to resume:
+- Is the metric accurate? (e.g., latency improvement, user count, uptime %)
+- Am I claiming the right ownership level? (solo, led, contributed, supported)
+- Is this work in production or delivered to users?
 
-| Item | Status | Correct Framing |
-|------|--------|----------------|
-| _Example: My Nature paper_ | _under review_ | _"under review at Nature" — never say "published in Nature"_ |
-| _Example: Internal tool_ | _unpublished_ | _"infrastructure I developed" — never imply peer-reviewed_ |
-
-Add your own rows. Delete the examples.
+Add any corrections you discover during interview prep.
 
 ---
 
@@ -57,10 +50,10 @@ Verified errors to never re-introduce. Add entries as you catch mistakes.
 
 Define the role types you're targeting. Each gets a bundle during setup.
 
-| Role Name | Target Employers | Tier | Bundle File |
-|-----------|-----------------|------|-------------|
-| _Example: National Lab_ | _DOE labs, national facilities_ | _1_ | _bundle_national_lab.md_ |
-| _Example: Industry R&D_ | _Tech companies, R&D divisions_ | _2_ | _bundle_industry_rd.md_ |
+| Role Name | Target Employers | Job Titles | Tier | Bundle File |
+|-----------|-----------------|-----------|------|-------------|
+| DevOps/SRE | Any company (0-3 years exp) | DevOps Engineer, Cloud Engineer, Infrastructure Engineer, Platform Engineer | 1 | bundle_devops_sre.md |
+| FullStack/SWE | Any company (0-3 years exp) | Full Stack Developer, Backend Engineer, SDE, Software Engineer | 1 | bundle_fullstack_swe.md |
 
 **Tier guide:** 1 = strongest evidence, full portfolio | 2 = strong with targeted emphasis | 3 = viable with careful framing
 
@@ -68,11 +61,14 @@ Define the role types you're targeting. Each gets a bundle during setup.
 
 ## Role-Type Decision Tree
 
-Customize this to map JD keywords to your role types.
+Map JD keywords to detect which persona to use (DevOps/SRE vs FullStack/SWE).
 
 | If JD mentions... | Primary profile | Secondary (hybrid) |
 |-------------------|----------------|-------------------|
-| _[your domain keywords]_ | _[role type]_ | _[secondary or --]_ |
+| Kubernetes, Terraform, AWS, GCP, infrastructure, SRE, reliability, observability, deployment automation | DevOps/SRE | -- |
+| CI/CD, on-call, incident response, platform engineering, monitoring, logging, MTTR | DevOps/SRE | FullStack |
+| React, TypeScript, Node.js, Java, REST API, system design, backend, full-stack, microservices | FullStack/SWE | -- |
+| shipping features, product development, API design, databases, architecture, end-to-end ownership | FullStack/SWE | DevOps/SRE |
 
 ---
 
@@ -82,16 +78,15 @@ List template sections that should NEVER be modified during generation.
 These are copied verbatim from your template every time.
 
 - Education
-- Publications (CV)
-- Honors & Awards
+- Honors & Awards (optional)
 - Header block (name, contact, links)
-- _[Add any other fixed sections]_
+
+**Note:** Projects section is VARIABLE — selected per JD from the projects pool.
 
 ---
 
 ## Output Rules
 
 - **Email in all outputs:** [same as Personal Info email]
-- **Resume package:** [N] pages + 1-page cover letter
-- **CV package:** [N] pages + 1-2 page cover letter
+- **Resume package:** 1 page + 1-page cover letter (2 pages total)
 - **Output .tex files ONLY** — user compiles locally

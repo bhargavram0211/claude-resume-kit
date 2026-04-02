@@ -108,11 +108,11 @@ The tool is authoritative — never trust mental math for char counts. If the to
 **Steps:**
 1. Verify all expected files exist in `output/<FolderName>/`:
    - `session_<name>.md`
-   - `e2e_<name>_[resume|cv].tex` + `.pdf` + compile artifacts
+   - `e2e_<name>_resume.tex` + `.pdf` + compile artifacts
    - `e2e_<name>_cover_letter.tex` + `.pdf` + compile artifacts
    - `critique_<name>.md`
 2. Rename final PDFs for submission (derive name from `config.md` Personal Info):
-   - `cp e2e_<name>_[resume|cv].pdf <Firstname>_<Lastname>_[Resume|CV].pdf`
+   - `cp e2e_<name>_resume.pdf <Firstname>_<Lastname>_Resume.pdf`
    - `cp e2e_<name>_cover_letter.pdf <Firstname>_<Lastname>_Cover_Letter.pdf`
    - Keep originals alongside
 3. Confirm to user: "Package complete in output/<FolderName>/ — [N] files"

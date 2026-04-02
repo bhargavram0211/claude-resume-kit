@@ -47,6 +47,26 @@ claude-resume-kit/
 
 ---
 
+## Use Cases: Researchers vs. Software Engineers
+
+This kit supports two distinct workflows:
+
+### Researchers (PhDs, Faculty Candidates)
+- **Setup:** Extract papers (PDF or LaTeX source) using `/setup-extract`
+- **Knowledge Base:** Extractions → experience files (with publication status) → bundles (Academic, R&D, Startup)
+- **Resume:** 2–5 page CV with tailored bullets, publications, funding, awards
+- **Skills:** Paper extraction, publication framing, multi-audience positioning (tenure-track, postdoc, industry)
+
+### Software Engineers (Students, IC Track, Career-Changers)
+- **Setup:** Structured Q&A using `/swe-setup` to capture positions and projects
+- **Knowledge Base:** Work history + projects → dual-persona experience files (DevOps/SRE variant + FullStack/SWE variant) + bundles + projects pool
+- **Resume:** 1-page resume with persona-specific bullets and auto-selected projects
+- **Skills:** Dual-persona framing, JD keyword detection, project relevance scoring, role-type auto-detection
+
+Both tracks use the same generation pipeline (`/make-resume`, `/make-cl`, `/critique`, `/edit-resume`).
+
+---
+
 ## Concepts
 
 ### Session Files
@@ -87,6 +107,37 @@ The system enforces accuracy through provenance tracking in `config.md`. Every a
 - Claim internal tools are peer-reviewed
 - Use full-ownership verbs for shared work
 - Inflate author position
+
+### SWE-Specific Concepts (Dual-Persona Framework)
+
+**Personas:** The system supports two distinct role types:
+- **DevOps/SRE/Cloud/Infrastructure** — reliability, automation, scale, on-call culture, infrastructure as code
+- **FullStack/SWE/Product** — shipping, system design, API design, product impact, technical ownership
+
+**Experience Variants:** Each position has two framings:
+- `experience_<company>_devops.md` — same achievements, framed for infrastructure impact (uptime, deployments, scaling, MTTR)
+- `experience_<company>_swe.md` — same achievements, framed for product impact (features shipped, system design, user velocity)
+
+**Persona Detection:** When you run `/make-resume` on a JD, the system automatically scores DevOps vs SWE keywords:
+- DevOps signals: Kubernetes, Terraform, SRE, reliability, on-call, infrastructure as code, deployment, scaling, uptime
+- SWE signals: React, TypeScript, Node.js, backend, system design, feature, API, microservices, product
+
+Higher score = detected persona. Matched bullets are pulled from the corresponding experience variant.
+
+**Projects Pool:** One central directory (`resume_builder/projects/`) holds all projects. Each project card has:
+- Dual bullet variants (DevOps frame + SWE frame)
+- Tags for JD keyword matching
+- Metrics (GitHub stars, production scale, latency, throughput)
+
+During generation, projects are scored by JD keyword overlap and auto-selected (top 2–3 by score).
+
+**Role-Type Bundles:** Two bundles encode role-type strategy:
+- `bundle_devops_sre.md` — S1–S5 for infrastructure roles (role profile, summary tagline, achievement reframing, skills grouping, CL hooks)
+- `bundle_fullstack_swe.md` — S1–S5 for product/SWE roles
+
+The detected persona determines which bundle is loaded for that JD.
+
+---
 
 ### The Critique System
 
@@ -143,12 +194,21 @@ Session 3:  /critique                     → critique .md with score
 
 ### Knowledge Base (built by skills, then editable)
 
+#### For Researchers
 | File | How to customize |
 |------|-----------------|
 | **Experience files** | Edit bullet text, add/remove achievements, adjust tags |
 | **Bundles** | Change priority matrices, rewrite summary guides, add role types |
 | **Skills taxonomy** | Add/remove skills, change groupings, adjust bold rules |
 | **Pub metadata** | Update citation counts, add new publications |
+
+#### For Software Engineers
+| File | How to customize |
+|------|-----------------|
+| **Experience files** (dual variants) | Edit bullets, adjust DevOps vs SWE framing, add/remove achievements |
+| **Projects pool** | Add projects, update metrics, adjust GitHub links and tech tags |
+| **Bundles** (DevOps + SWE) | Change priority matrices, rewrite role profiles, adjust persona signals |
+| **Skills guide** | Organize skills by proficiency, mark DevOps/SWE emphasis |
 
 ### Reference Docs (advanced)
 
@@ -209,3 +269,30 @@ Each person needs their own clone with their own `config.md`, knowledge base, an
 
 **Q: What Claude model should I use?**
 The skills are designed for Claude's most capable models (Opus, Sonnet). Less capable models may skip steps or produce lower-quality output.
+
+---
+
+## FAQ — SWE / DevOps Track
+
+**Q: What if I apply to both DevOps/SRE and SWE/Backend roles?**
+This is exactly what the dual-persona system handles. During `/swe-setup`, you create two framing variants for each position. When you run `/make-resume` on a JD, the system auto-detects the persona and pulls the matching bullets. No manual reframing needed.
+
+**Q: How do I add a new position to my KB?**
+You can either:
+1. Run `/swe-setup` again to add it to your KB
+2. Manually create `experience_<company>_devops.md` and `experience_<company>_swe.md` files in `resume_builder/experience/`, following the achievement format from the examples
+
+**Q: Can I include side projects and coursework?**
+Yes. The `/swe-setup` wizard and projects pool are designed for this. Each project can be a personal project, hackathon, open-source, coursework, or work project — just tag it appropriately.
+
+**Q: What if a JD mentions both DevOps and SWE keywords?**
+The system detects this as a "Hybrid" persona. It will ask you which is primary and load both variants, prioritizing the primary. You can always override at the Phase 0 STOP.
+
+**Q: How is persona detection calibrated?**
+The keyword matching is tuned to common industry terminology. If a JD uses non-standard language, you can override the detected persona at Phase 0 and choose manually.
+
+**Q: Should I include all my projects in the pool?**
+Include 5–10 strong projects that you're confident defending in an interview. Include older projects if they're still relevant to your target roles. The system will score by JD keyword match, so only the most relevant 2–3 will appear in any given resume.
+
+**Q: How do I update a project's metrics?**
+Edit the `project_<slug>.md` file in `resume_builder/projects/` directly. Update GitHub stars, latency metrics, scale, whatever is most impressive and accurate. Re-run `/make-resume` on your JDs to refresh the scoring.

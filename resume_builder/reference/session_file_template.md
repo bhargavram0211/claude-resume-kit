@@ -11,8 +11,9 @@ Every JD gets a persistent session file: `output/<FolderName>/session_<name>.md`
 - **File:** JDs/[file].txt
 - **Role:** [title]
 - **Company:** [company] ([context])
+- **Persona:** [DevOps/SRE | FullStack/SWE | Hybrid (primary: X)]
 - **Bundle:** [role_type]
-- **Format:** [Resume/CV] ([N]-page, [cls]) + [N]-page cover letter
+- **Format:** Resume (1-page, resume.cls) + 1-page cover letter
 - **Salary/Details:** [if available]
 
 ## JD Analysis
@@ -53,13 +54,11 @@ Every JD gets a persistent session file: `output/<FolderName>/session_<name>.md`
 - **Domain vocabulary:** What terms separate insider from outsider at THIS company?
 
 ## Cover Letter Plan
-- **Institution type:** Industry / National Lab / Academic
-- **Paragraph count:** [N] paragraphs, [word count target]
-- **P1 hook:** [specific product/paper/program to reference]
+- **Paragraph count:** 3 paragraphs, 250-300 words
+- **P1 hook:** [specific product/technology/engineering blog to reference]
 - **P2-P3 evidence:** [which achievements to highlight, how to frame]
-- **Domain pivot:** [methodology bridge sentence, if pivoting]
-- **Jargon level:** HR-safe / Technical / Academic
-- **"Why them" hook:** [specific connection to their work]
+- **Jargon level:** HR-safe P1 / Technical P2-P3
+- **"Why them" hook:** [specific connection to their work/engineering culture]
 
 ## Bullet Plan
 
@@ -75,10 +74,14 @@ Note: Any FIXED positions (e.g., internships) are not included in this plan.
 ### Position 3 ([N] bullets, [N] rendered lines)
 [same table]
 
-**Budget:** [N] variable bullets, [N] rendered lines vs target [N]
+### Projects ([N] cards selected from pool)
+| # | Project ID | Project Name | Score | Bullets | Rationale |
+|---|-----------|-------------|-------|---------|-----------|
+
+**Budget:** [N] experience bullets + [N] project cards, [N] total rendered lines vs target 32-36
 
 ## Output Files
-- Resume/CV: `output/<FolderName>/e2e_<name>_[resume|cv].tex`
+- Resume: `output/<FolderName>/e2e_<name>_resume.tex`
 - Cover Letter: `output/<FolderName>/e2e_<name>_cover_letter.tex`
 - Critique: `output/<FolderName>/critique_<name>.md`
 
@@ -95,13 +98,14 @@ Note: Any FIXED positions (e.g., internships) are not included in this plan.
 
 ## Status
 - Phase 0: [PENDING | DONE]
-- Phase 1: [PENDING | DONE (N bullets confirmed)]
+- Phase 1: [PENDING | DONE (N experience bullets + N projects confirmed)]
 - Phase 2 Resume:
   - Summary: [PENDING | DONE]
   - Skills: [PENDING | DONE]
   - Position 1 ([N] bullets): [PENDING | DONE | IN_PROGRESS]
   - Position 2 ([N] bullets): [PENDING | DONE | IN_PROGRESS]
   - Position 3 ([N] bullets): [PENDING | DONE | IN_PROGRESS]
+  - Projects: [PENDING | DONE]
   - Compile: [PENDING | DONE]
 - Cover Letter: [PENDING | IN_PROGRESS | DONE]
 - Critique: [PENDING | IN_PROGRESS | CURRENT (score) | STALE]

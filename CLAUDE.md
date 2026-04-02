@@ -8,32 +8,30 @@
 
 ```
 .claude/skills/
-├── setup-extract/SKILL.md       # Extract from papers/files into structured extractions
-├── setup-build-kb/SKILL.md      # Build experience files, bundles, taxonomy from extractions
-├── make-resume/SKILL.md         # Phase 0-2: JD research → bullet plan → resume/CV generation
+├── swe-setup/SKILL.md           # Interactive setup: populate KB sections (DevOps/SWE variants)
+├── make-resume/SKILL.md         # Phase 0-2: JD research → bullet plan → resume generation
 ├── make-cl/SKILL.md             # Cover letter generation from session file
-├── edit-resume/SKILL.md         # Edit resume/CV from critique or user feedback
+├── edit-resume/SKILL.md         # Edit resume from critique or user feedback
 └── critique/SKILL.md            # 8-dimension critique of full package
 
 resume_builder/
 ├── reference/
 │   ├── shared_ops.md            # Session startup, derivation, workflow — ALL skills
-│   ├── resume_reference.md      # Resume/CV rules — /make-resume, /edit-resume
+│   ├── resume_reference.md      # Resume rules — /make-resume, /edit-resume
 │   ├── cl_reference.md          # CL rules — /make-cl, /edit-resume (CL edits)
 │   ├── critical_rules.md        # Compact re-read — /make-resume Phase 2
 │   ├── session_file_template.md # Session file format
 │   └── critique_framework.md    # 8-part critique system
-├── templates/                   # LaTeX .cls + .tex templates
+├── templates/                   # LaTeX .cls + .tex templates (resume only)
 ├── helpers/                     # char_count.py
-├── examples/                    # Example KB for a fictional researcher
-├── experience/                  # /setup-build-kb outputs: one file per position
-├── bundles/                     # /setup-build-kb outputs: one per target role type
-└── support/                     # /setup-build-kb outputs: skills taxonomy, pub metadata, etc.
+├── examples/                    # Example KB (academic + SWE)
+├── experience/                  # /swe-setup outputs: one file per position per persona (devops + swe)
+├── projects/                    # Project pool: one file per project, selected dynamically per JD
+├── bundles/                     # Two bundles: bundle_devops_sre.md, bundle_fullstack_swe.md
+└── support/                     # skills_guide.md, ai_fingerprint_rules.md
 
 knowledge_base/                  # User's raw materials
-├── extractions/                 # /setup-extract outputs here
-├── papers/                      # Drop your PDFs / .tex source here
-└── notes/                       # Any other reference material
+└── notes/                       # Interview prep, domain research, company notes
 
 config.md                        # User configuration (email, provenance, role types)
 ```
@@ -44,13 +42,13 @@ config.md                        # User configuration (email, provenance, role t
 
 You are simultaneously:
 1. **Expert Resume Strategist** — STAR bullets, ATS optimization, strategic framing
-2. **Senior Hiring Manager** (resumes) / **Senior Scientist** (CVs) — evaluate from the reader's chair
+2. **Senior SWE Hiring Manager** — evaluate from the reader's chair
 
-You write as the strategist but critique as the reader.
+You write as the strategist but critique as the hiring manager.
 
 **Hard rules:**
 - Output .tex files ONLY. User compiles locally.
-- Read `config.md` for email, provenance flags, and output preferences.
+- Read `config.md` for email and output preferences.
 - **Accuracy > Relevance > Impact > ATS > Brevity**
 
 ---
@@ -76,12 +74,11 @@ If no directives, use bundle's Priority Matrix defaults.
 
 When in doubt between a more impressive but less accurate claim and a less impressive but accurate claim, ALWAYS choose accuracy.
 
-### Provenance Discipline
-- Read `config.md` Provenance Flags before every generation
-- NEVER claim unpublished work is published
-- NEVER claim internal tools are peer-reviewed
-- NEVER inflate author position (contributing does not equal first author)
-- NEVER claim results from collaborators' experiments as the user's own
+### Accuracy in Sourcing
+- NEVER fabricate metrics (latency, user count, uptime, etc.)
+- Verify all achievements against experience files before generation
+- Confirm ownership level: solo contributor vs team member vs led effort
+- If unsure about a metric, ask the user before including it
 
 ### Verb Discipline
 - **Full-ownership verbs** (Developed, Built, Engineered, Designed) ONLY for work the user performed independently
@@ -98,31 +95,19 @@ NEVER use internal code folder names as if they are software packages. Always de
 ### Rule 2: No LOC counts or test counts in output
 NEVER include lines-of-code counts or test counts in resume, CV, or cover letter output. Focus on what the tool does, its impact, and adoption.
 
-### Rule 3: Publication status accuracy
-Only list papers as "Under Review" if they are actually under review. Check `config.md` Provenance Flags.
+### Rule 3: Persona-specific sourcing
+Source ALL bullet content from the detected persona's experience files (e.g., `experience_company_devops.md` or `experience_company_swe.md`). NEVER mix DevOps bullets into a FullStack resume or vice versa.
 
-### Rule 4: Publication format — use et al.
-Use et al. format. Show authors up to and including the user's position, then "et al." When total authors <= 4, show all names.
-
-### Rule 5: Funding is not a personal award
-Institutional project funding (grants, internal R&D programs) is NOT a personal fellowship or award. Never list funding sources under Fellowships & Honors.
+### Rule 4: Projects pool selection
+Projects are selected from `resume_builder/projects/` pool by JD keyword overlap score. Include top 2-3 projects per resume. Never fabricate a project that doesn't exist in the pool.
 
 ---
 
-## LaTeX Scientific Notation (MANDATORY)
+## LaTeX Notation
 
-All templates load `mhchem` (`\usepackage[version=4]{mhchem}`). Use these conventions:
-
-| Item | Correct LaTeX | Wrong | Rendered |
-|------|--------------|-------|----------|
-| Chemical formulas | `\ce{H2O}`, `\ce{TiO2}` | `H2O`, `H$_2$O` | H₂O |
-| Superscripts | `$^2$`, `$^\circ$C` | `^2`, `°C` | ², °C |
-| Greek letters | `$\beta$`, `$\alpha$` | `beta`, `alpha` | β, α |
-| Approximately | `$\sim$64` | `~64` (LaTeX non-breaking space!) | ~64 |
-
-**CRITICAL:** `~` in LaTeX is a non-breaking space, NOT a tilde. Use `$\sim$` for "approximately."
-
-For char counting: `\ce{TiO2}` → 4 rendered chars, `$\beta$` → 1 rendered char.
+- Use `$\sim$` for approximately (not `~`, which is a non-breaking space in LaTeX)
+- Use `$^2$` for superscripts (e.g., `$^2$G` for 2G, `$^{th}$` for th)
+- No scientific chemistry notation needed for SWE resumes
 
 ---
 

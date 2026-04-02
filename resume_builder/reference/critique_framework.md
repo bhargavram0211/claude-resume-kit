@@ -158,7 +158,7 @@ Score each dimension independently, then compute weighted total.
 | 2 | Summary | 10% | Bridge sentence, target-domain language, prestige signals, forward-looking intent |
 | 3 | Skills Section | 10% | Group names (domain signal), content relevance, bold accuracy, no wasted entries |
 | 4 | Bullet Quality | 25% | Per-bullet JD alignment (HIGH/MEDIUM/LOW), reframing quality, quantification, action verbs |
-| 5 | Publication Selection | 10% | Venue prestige, tag relevance, first-author ratio, domain gap acknowledgment |
+| 5 | Project Relevance | 10% | JD keyword overlap, GitHub presence, recency, technical stack match |
 | 6 | Narrative Coherence | 15% | Header-to-footer story, domain thread count, first-impression timing |
 | 7 | Page Fill & Visual | 5% | Budget compliance, orphan check, compile clean, slack acceptable |
 | 8 | Credibility Signals | 10% | Venue quality, metrics (papers, citations, awards), platform adoption, leadership evidence |
@@ -304,7 +304,7 @@ If a cover letter was generated in the same session, run all checks below. Detec
 - [ ] **CL deepens, not introduces:** Every major CL claim is traceable to a resume/CV bullet. CL adds context/significance, not new achievements.
 - [ ] **No contradictions:** Dates, metrics, claims, and framing consistent across both documents.
 - [ ] **Complement, not repeat:** CL is NOT a prose restatement of resume bullets. It adds motivation, "why this institution," research vision, methodology arc.
-- [ ] **Page budget:** Resume+CL = 3pp, CV+CL = 6-7pp. If CV CL is 2 pages, page 2 >= half filled before signature.
+- [ ] **Page budget:** Resume+CL = 2 pages total.
 
 ---
 
@@ -389,7 +389,7 @@ If a cover letter was generated in the same session, run all checks below. Detec
 | Summary | X/10 | 10% | X.XX | |
 | Skills Section | X/10 | 10% | X.XX | |
 | Bullet Quality | X/10 | 25% | X.XX | |
-| Publications | X/10 | 10% | X.XX | |
+| Projects | X/10 | 10% | X.XX | |
 | Narrative Coherence | X/10 | 15% | X.XX | |
 | Page Fill & Visual | X/10 | 5% | X.XX | |
 | Credibility Signals | X/10 | 10% | X.XX | |
@@ -456,7 +456,7 @@ Final mechanical checklist. Run AFTER all other critique parts. These are pass/f
 ### Mechanical Checks
 - [ ] All bullets within char limits (no OVER violations from char_count.py)
 - [ ] All multi-line bullets pass orphan check (last line >= 70% fill)
-- [ ] Page fill within budget (resume: <= 3 lines white space on page 2; CV: 45 rendered bullet lines)
+- [ ] Page fill within budget (resume: 1 page, <= 2 lines white space; no overflow)
 - [ ] No ordering errors in bullet sequencing
 
 ### Content Checks
@@ -464,7 +464,7 @@ Final mechanical checklist. Run AFTER all other critique parts. These are pass/f
 - [ ] All provenance flags correct (see CLAUDE.md for project-specific flags)
 - [ ] No forbidden terms (see CLAUDE.md for project-specific corrections)
 - [ ] No inflation (contributing-author verbs hedged, no false claims)
-- [ ] Publication entries match pub_metadata.md (titles, journals, years)
+- [ ] Project metrics match project pool files (no fabricated performance numbers, GitHub links valid if listed)
 - [ ] Cover letter claims traceable to resume/CV bullets
 
 ### Structural Checks

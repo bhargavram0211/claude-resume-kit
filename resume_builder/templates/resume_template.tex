@@ -15,8 +15,6 @@
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{fontawesome}
-\usepackage{tikz}
-\usepackage{graphicx}
 \hypersetup{
     colorlinks = true,
     linkcolor = [rgb]{0.9,0.4,0.4},
@@ -26,7 +24,6 @@
     urlcolor = [rgb]{0.0,0.0,0.99},
 }
 \usepackage{xcolor}
-\usepackage[version=4,arrows=pgf-filled]{mhchem}
 \usepackage[includefoot,left=0.5in,top=0.5in,right=0.5in,bottom=0.2in,textwidth=7.5in,textheight=10.8in]{geometry}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -44,7 +41,7 @@
 \name{[CONFIG: Full Name, Degree]}
 
 % FIXED: Links -- include whichever you have; delete unused lines
-\address{\href{[CONFIG: website URL]}{[CONFIG: site display]} \\ \href{[CONFIG: LinkedIn URL]}{LinkedIn} \\ \href{[CONFIG: Google Scholar URL]}{Google Scholar}}
+\address{\href{[CONFIG: website URL]}{[CONFIG: site display]} \\ \href{[CONFIG: LinkedIn URL]}{LinkedIn} \\ \href{[CONFIG: GitHub URL]}{\faGithub~GitHub}}
 % FIXED: Contact
 \address{[CONFIG: email] \\ [CONFIG: phone]}
 % GENERATE: Relocation target per JD
@@ -68,14 +65,14 @@
 %   Em-dash (---) counts as 1 char but renders ~2x wide. Budget 2 extra per em-dash.
 %   Bold in bullets: ~0.42 penalty/bold char (10 bold chars ≈ lose 4 chars capacity).
 %
-% PAGE FILL BUDGET:
-%   After filling FIXED sections, compile and count rendered lines per page.
-%   Remaining lines = your variable bullet budget.
-%   Example for 2-page resume with 5 skill groups:
-%     Skills 4-3-2-2-2 (13 lines): ~21 variable bullets (2L each)
-%     Skills 4-4-2-2-2 (14 lines): ~20 variable bullets
-%   Variable bullets = sum of all GENERATE position bullets
-%   FIXED position bullets are NOT counted in the variable budget.
+% PAGE FILL BUDGET (1-page resume):
+%   Target: 32-36 rendered lines total (fits 1 page comfortably)
+%   - Header + Summary: ~5 lines
+%   - Skills (4-3-2-2): 11 lines
+%   - Experience (2-3 positions, 2-3 bullets each): 6-8 lines
+%   - Projects (2-3 items, 1-2 bullets each): 4-6 lines
+%   - Education + Awards: 3-4 lines
+%   Adjust experience/projects split to fit page budget.
 %
 % POSITION FORMAT (FLIPPED):
 %   Bold line = JD-customized domain theme (strongest customization lever)
@@ -88,47 +85,47 @@
 %	SUMMARY — GENERATE per JD
 %----------------------------------------------------------------------------------------
 % GENERATE: Rewrite per JD using bundle Section 2 building blocks
-% 5 body lines (4-5 sentences). Lead with years of experience + primary methods.
-% End with publication/citation metrics if applicable.
+% 3-4 body lines (3-4 sentences). Lead with role title + primary domain.
+% Include key technical skills + impact metric.
 % Max 1 paragraph -- no line breaks.
 \begin{rSection}{Summary}
-[GENERATE: [Domain] scientist with [N]+ years combining \textbf{[primary method]} and \textbf{[secondary method]} for [application domain]. [1-2 sentences on key accomplishments tailored to JD]. [Metrics: publications, citations, awards if applicable].]
+[GENERATE: [Role title/domain] engineer with [N]+ years in \textbf{[primary skill]} and \textbf{[secondary skill]}. [1-2 sentences on key shipping/technical achievement tailored to JD]. [Metrics: users, scale, performance improvement].]
 \end{rSection}
 \vspace{-0.15cm}
 
 %----------------------------------------------------------------------------------------
 %	TECHNICAL SKILLS — GENERATE per JD (Format C)
 %----------------------------------------------------------------------------------------
-% GENERATE: 5 groups in Format C (categorized dash sub-items)
-% Default config from config.md (e.g. 4-3-2-2-2 = 13 content lines)
-% Load skills_taxonomy.md to map JD keywords to skill entries
-% Group names are JD-customizable; order most JD-relevant first
-% Bold 6-8 tools that most directly match JD keywords
+% GENERATE: 4 groups in Format C (categorized dash sub-items)
+% Default config from config.md (4-3-2-2 = 11 content lines)
+% Load skills_guide.md to map JD keywords to skill entries
+% Group names are JD-customizable; order most JD-relevant first (persona-specific)
+% Bold 4-6 tools that most directly match JD keywords
 % Each dash item = exactly 1 rendered line (~105-111 chars), no wrapping
 \begin{rSection}{Technical Skills}
 % FORMAT C: Use \skillgroup{} and \skilldash{} commands from resume.cls
 % Each \skilldash = exactly 1 rendered line. Char limit: 119 - (0.5 x bold_chars)
 
-\begin{skillgroup}{[GENERATE: Most JD-Relevant Domain]}
-\skilldash{[GENERATE: tools, methods — max ~105-111 chars with bold penalty]}
+\begin{skillgroup}{[GENERATE: Primary Domain (e.g. Backend, Cloud, DevOps)]}
+\skilldash{[GENERATE: tools, frameworks, languages — max ~105-111 chars with bold penalty]}
 \skilldash{[GENERATE]}
-\skilldash{[GENERATE]}
-\end{skillgroup}
-
-\begin{skillgroup}{[GENERATE: Second Domain]}
 \skilldash{[GENERATE]}
 \skilldash{[GENERATE]}
 \end{skillgroup}
 
-\begin{skillgroup}{[GENERATE: Third Domain]}
+\begin{skillgroup}{[GENERATE: Secondary Domain (e.g. Frontend, Infrastructure, Databases)]}
+\skilldash{[GENERATE]}
+\skilldash{[GENERATE]}
 \skilldash{[GENERATE]}
 \end{skillgroup}
 
-\begin{skillgroup}{[GENERATE: Fourth Domain]}
+\begin{skillgroup}{[GENERATE: Third Domain (e.g. Testing, Tools, Platforms)]}
+\skilldash{[GENERATE]}
 \skilldash{[GENERATE]}
 \end{skillgroup}
 
-\begin{skillgroup}{[GENERATE: Programming \& Tools]}
+\begin{skillgroup}{[GENERATE: Languages \& Foundational Skills]}
+\skilldash{[GENERATE]}
 \skilldash{[GENERATE]}
 \end{skillgroup}
 
@@ -140,8 +137,8 @@
 %----------------------------------------------------------------------------------------
 % Add one rSubsection per position. Most recent first.
 % FLIPPED format: Bold line = JD-customized theme; italic = formal role + institution.
-% Mark any position as FIXED if its bullets never change across JDs.
-\begin{rSection}{Research Experience}
+% Load persona-specific experience file (devops or swe variant).
+\begin{rSection}{Experience}
 
 % --- Position 1 (most recent) ---
 % GENERATE: Select bullets from bundle; bold theme line customized to JD
@@ -174,6 +171,35 @@
 \vspace{-0.15cm}
 
 %----------------------------------------------------------------------------------------
+%	PROJECTS — GENERATE: Select 2-3 by JD keyword relevance
+%----------------------------------------------------------------------------------------
+% GENERATE: Score all projects from resume_builder/projects/ pool by JD keyword overlap
+% Select top 2-3 projects per relevance score
+% Use persona-matching bullet variant (DevOps frame or SWE frame)
+% Each project: header line + 1-2 bullets (max 2L each)
+\begin{rSection}{Projects}
+
+% --- Project 1 (highest score) ---
+\begin{rSubsection}{[GENERATE: Project Name]}{\textcolor{black!60}{[FIXED: Year]}}{[GENERATE: Stack: tool1, tool2, tool3]}{}
+\item [GENERATE: Bullet 1 -- strongest JD-relevant technical achievement]
+\item [GENERATE: Bullet 2 -- optional, use if strong JD relevance]
+\end{rSubsection}
+
+% --- Project 2 ---
+\begin{rSubsection}{[GENERATE: Project Name]}{\textcolor{black!60}{[FIXED: Year]}}{[GENERATE: Stack: tools]}{}
+\item [GENERATE: Bullet 1]
+\end{rSubsection}
+
+% --- Project 3 (optional) ---
+% Uncomment if including 3 projects:
+% \begin{rSubsection}{[GENERATE: Project Name]}{\textcolor{black!60}{[FIXED: Year]}}{[GENERATE: Stack]}{}
+% \item [GENERATE: Bullet 1]
+% \end{rSubsection}
+
+\end{rSection}
+\vspace{-0.15cm}
+
+%----------------------------------------------------------------------------------------
 %	EDUCATION — FIXED: Fill with your actual education
 %----------------------------------------------------------------------------------------
 % Each entry: {Degree (honors)} \hfill {Years} \\ {Institution}, Location \hfill GPA
@@ -188,30 +214,7 @@
 \vspace{-0.15cm}
 
 %----------------------------------------------------------------------------------------
-%	SELECTED PUBLICATIONS — GENERATE: Claude picks 5 per JD relevance
-%----------------------------------------------------------------------------------------
-% GENERATE: Score publications per JD relevance using pub_metadata.md
-% Copy-paste FIXED author + journal LaTeX blocks from pub_metadata.md
-% GENERATE JD-shortened title + JD-relevant keyword tags at runtime
-% 2-line hard limit per entry, last line >= 70% filled
-% Prioritize: first-author > co-first > contributing; high-impact > standard
-\begin{rSection2}{Selected Publications (\href{[CONFIG: Google Scholar URL]}{Google Scholar}: [FIXED: N] papers $\vert$ [FIXED: N]+ citations)}
-
-\item [GENERATE: Publication 1 -- most JD-relevant, short format]
-
-\item [GENERATE: Publication 2]
-
-\item [GENERATE: Publication 3]
-
-\item [GENERATE: Publication 4]
-
-\item [GENERATE: Publication 5]
-
-\end{rSection2}
-\vspace{-0.15cm}
-
-%----------------------------------------------------------------------------------------
-%	HONORS & AWARDS — FIXED: Fill with your actual awards
+%	HONORS & AWARDS — FIXED: Fill with your actual awards (optional)
 %----------------------------------------------------------------------------------------
 % Format: \item \textbf{Award}, Granting Body (Year). Brief context.
 % Aim for 1 rendered line each. Adjust count to fit page budget.
@@ -224,13 +227,13 @@
 \vspace{-0.1cm}
 
 %----------------------------------------------------------------------------------------
-%	IMMIGRATION — FIXED content, include/exclude per JD
-%   USA JD: keep this block | Non-USA JD: delete (frees ~2 lines)
+%	IMMIGRATION — OPTIONAL (include for USA JDs, delete for non-USA)
+%   For USA JDs: uncomment below | For non-USA JDs: delete or leave commented
 %----------------------------------------------------------------------------------------
 
-\begin{center}
-\vspace{0.15cm}
-\textit{[CONFIG: Immigration status line from config.md]}
-\end{center}
+% \begin{center}
+% \vspace{0.15cm}
+% \textit{[CONFIG: Immigration status line from config.md]}
+% \end{center}
 
 \end{document}

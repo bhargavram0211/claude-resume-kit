@@ -9,14 +9,13 @@
 ## QUICK BUDGET CARD (read this FIRST)
 
 ```
-RESUME (2-page, resume.cls):  ~20 variable bullets | Skills 13 lines (4-3-2-2-2) | 5 pubs | 5 awards
-CV     (5-page, cv.cls):      19-21 variable bullets (45 rendered lines) | Skills 17 lines (4-4-3-3-3) | all pubs | 6 awards
+RESUME (1-page, resume.cls):  ~8-10 variable bullets | 2-3 projects | Skills 11 lines (4-3-2-2) | optional awards
 
 Resume bullet: max 2 rendered lines | 1L: 105-111 chars | 2L: 189-205 chars (target ~200)
-CV bullet:     max 3 rendered lines | 2L: 168-182 chars | 3L: 250-268 chars (target ~175/~260)
+Project bullet: max 2 rendered lines | 1L/2L same as resume bullets
 
-Cover letter: Resume = 1 page (250-300 words) | CV = 1-2 pages (350-450 words)
-Full package: Resume + CL = 3 pages | CV + CL = 6-7 pages
+Cover letter: Resume = 1 page (250-300 words)
+Full package: Resume + CL = 2 pages
 ```
 
 **If your bullet count doesn't match the budget above, STOP and fix before generating.**
@@ -25,31 +24,20 @@ Full package: Resume + CL = 3 pages | CV + CL = 6-7 pages
 
 ## Section-by-Section Specs
 
-### Resume (resume.cls)
+### Resume (resume.cls, 1-page)
 
-1. **Summary** (bundle Section 2): 4-5 sentences, exactly 5 body lines. 500-555 rendered chars (HARD MAX 570, floor ~490). Orphan: last line >= 78 chars.
-   - **Headline Tagline:** 80-95 rendered chars, exactly 1 line.
-2. **Technical Skills** (bundle Section 4 + skills_taxonomy.md): Format C — 5 groups, default 4-3-2-2-2 (13 lines). Each dash = exactly 1 rendered line. Bold penalty: 119 - (0.5 x bold_chars).
-3. **Research Experience** (experience files + achievement_reframing_guide.md): Write bullets FRESH per Experience Bullet Writing Protocol (below). Max 2 rendered lines per bullet. Run char_count.py after each position.
+1. **Summary** (bundle Section 2): 3-4 sentences, 3-4 body lines. 400-500 rendered chars (HARD MAX 500). Orphan: last line >= 60 chars.
+   - **Headline Tagline:** 60-80 rendered chars, exactly 1 line (role + primary skill/domain + impact).
+2. **Technical Skills** (bundle Section 4 + skills_guide.md): Format C — 4 groups, default 4-3-2-2 (11 lines). Each dash = exactly 1 rendered line. Bold penalty: 119 - (0.5 x bold_chars).
+3. **Experience** (experience files for detected persona): Write bullets FRESH per Experience Bullet Writing Protocol (below). Max 2 rendered lines per bullet. Run char_count.py after each position.
    - resume.cls: Args 3+4 on SAME italic line
-   - **After all positions: verify total variable bullet count matches budget**
-4. **Education**: FIXED — copy from template
-5. **Selected Publications** (pub_metadata.md): 5 publications scored per JD. Copy FIXED author+journal blocks, GENERATE JD-shortened title + tags. 2 rendered lines hard limit per entry.
-6. **Honors & Awards**: FIXED — items from template
+   - Budget: ~8-10 total bullets across all experience positions
+   - **After all positions: verify total experience bullet count matches budget**
+4. **Projects** (resume_builder/projects/ pool, scored by JD keywords): Select 2-3 projects per JD. Each project: header (name + stack) + 1-2 bullets. Run char_count.py after all projects.
+   - Use persona-matching bullet variant (DevOps frame or SWE frame)
+5. **Education**: FIXED — copy from template
+6. **Honors & Awards**: FIXED — items from template (optional)
 7. **Immigration notice**: FIXED for USA JDs. Delete for non-USA JDs.
-
-### CV (cv.cls)
-
-1. **Research Summary** (bundle Section 2): Exactly 6 body lines. 500-540 rendered chars (HARD MAX 545, floor ~490). Orphan: last line >= 62 chars. Technical identity, not narrative.
-2. **Education**: FIXED — copy verbatim from cv_template.tex
-3. **Technical Expertise** (bundle Section 4 + skills_taxonomy.md): 4-4-3-3-3 ALWAYS (17 body lines). Bold penalty: 91 - (0.25 x bold_chars).
-4. **Research Experience**: Exactly 45 rendered bullet lines across 19-21 bullets, plus sub-theme lines.
-   - cv.cls: Args 3+4 on SEPARATE italic lines
-   - Max 3 rendered lines per bullet. CV-2L <= 190, CV-3L <= 280 (target ~175/~260)
-   - **Running total must reach exactly 45 rendered lines**
-5. **Fellowships & Honors**: FIXED — items from cv_template.tex
-6. **Publications**: FIXED — full list from cv_template.tex
-7-10. **Presentations, Mentorship, Collaborations, Computing**: All FIXED from cv_template.tex
 
 ---
 
@@ -67,14 +55,6 @@ Count: all remaining characters including spaces.
 |-------|---------------|---------|------------------|
 | 1 line | 105-111 chars | 117 | -- |
 | 2 lines | 189-205 chars | 218 | Last line >= 78 chars |
-
-**CV (11pt, textwidth=7.5in):**
-
-| Target Lines | Rendered Char Range | HARD MAX | Orphan Threshold |
-|-------|---------------|---------|------------------|
-| 1 line | 88-93 chars | 101 | -- |
-| 2 lines | 168-182 chars | 190 | Last line >= 65 chars |
-| 3 lines | 250-268 chars | 280 | Last line >= 65 chars |
 
 > **WARNING: AIM FOR THE MIDDLE OF THE TARGET RANGE — NOT THE HARD MAX.**
 > A Resume-2L bullet should target ~200 chars, not 218. A CV-2L should target ~175, not 190.
@@ -102,12 +82,7 @@ Bold characters render wider than normal text. Adjust effective char limits acco
 - 2-4 bold tools (~10-25 bold chars): 107-112 effective --> use 105-111 as default
 - 5+ bold tools (~28+ bold chars): ~105 effective --> tighten to 99-105
 
-**CV (11pt):** Effective limit = 91 - (0.25 x bold_char_count)
-- 0 bold: safe up to 91 chars/line (HARD MAX 93)
-- 2-3 bold tools (~10-18 bold chars): 85-88 effective --> use 83-88 as default
-- 5+ bold tools (~28+ bold chars): 83-85 effective --> tighten to 80-85
-
-Practical rule: count bold characters, subtract half (resume) or quarter (CV) from base limit.
+Practical rule: count bold characters, subtract half from base limit.
 
 **Per-bullet enforcement protocol:**
 1. Write the bullet text (LaTeX source)
@@ -136,44 +111,32 @@ For each element you write from scratch or modify (summary, skills dash, tagline
 
 ## Page Fill Budgets
 
-**2-Page Resume (resume.cls, 10pt):**
+**1-Page Resume (resume.cls, 10pt):**
 
-Technical Skills uses Format C (categorized dash sub-items, 5 groups).
-Any internship/fixed position is ALWAYS present (FIXED bullets, not counted in variable budget).
+Technical Skills uses Format C (categorized dash sub-items, 4 groups).
 
-**Variable Bullet Budget (Format C):**
+**Variable Bullet Budget:**
 
-The exact variable bullet count depends on your skills configuration and whether a USA immigration line is present. Typical range: **20-21 variable bullets** across all research positions. Count your FIXED bullets separately — they are set in the template.
+The exact variable bullet count depends on your skills configuration and whether a USA immigration line is present. Typical range: **8-10 variable experience bullets + 2-6 project bullets** on 1-page resume. Budget allocation:
+
+| Element | Lines | Notes |
+|---------|-------|-------|
+| Header + Summary | 4-5 | Fixed |
+| Technical Skills (4-3-2-2) | 11 | Fixed |
+| Experience (2-3 positions) | 6-8 | Variable (2-3 bullets per position) |
+| Projects (2-3 items) | 4-6 | Variable (1-2 bullets per project) |
+| Education | 2 | Fixed |
+| Awards (optional) | 1-2 | Fixed/Optional |
+| Total rendered lines | ~32-35 | Fits 1 page comfortably |
 
 **Adjustments:**
-- Adding a skills line (e.g., 4-4-2-2-2 instead of 4-3-2-2-2): -1 variable bullet
-- Removing immigration line (non-USA JD): +1 variable bullet in some configurations
-
-**5-Page CV (cv.cls, 11pt) — LOCKED:**
-
-Total: **~209 rendered text lines** across 5 pages. 1-2 lines slack at bottom of page 5 is acceptable.
-
-The exact line budget depends on your template's FIXED sections (publications, presentations, awards, etc.). Count the FIXED lines in your template, then allocate the remainder to JD-dependent content. The key constraints:
-
-| Category | Status |
-|----------|--------|
-| Header, Education, Honors, Pubs, Presentations, etc. | FIXED (count from template) |
-| Research Summary | JD-DEPENDENT (typically 7 lines: 1 heading + 6 body) |
-| Technical Expertise | JD-DEPENDENT (typically 18 lines: 1 heading + 17 body) |
-| Experience bullets | JD-DEPENDENT (**target 45 rendered lines**, 19-21 bullets, 2L/3L mix) |
-| Sub-theme names | JD-DEPENDENT (varies by position count) |
-
-**Experience bullet mix options (45 rendered lines):**
-- 18x2L + 3x3L = 21 bullets | 15x2L + 5x3L = 20 | 12x2L + 7x3L = 19
-- Allocate more bullets to JD-relevant positions, fewer to tangential ones
-
-**Sub-theme rebalancing:** To shift bullet weight toward a more JD-relevant sub-theme: (a) drop the weakest bullet from a less-relevant sub-theme (-2L), (b) split a high-content 3L achievement into two 2L bullets (method + finding, +1L). Net = -1L saved while adding a bullet where it matters. Both split bullets must stay within char limits. Never split a 2L bullet — it becomes two 1L fragments that look thin.
+- Add more projects → reduce experience bullets (vice versa)
+- Remove awards section → +1 space for experience or projects
+- Remove immigration line → +0.5 lines available
 
 **Position header rule:** The position title + date must fit on ONE line. If the title is too long, shorten the title so the date doesn't wrap to a second line. Wrapped dates waste a full vertical line and break visual alignment. Test by compiling — if the date wraps, trim the title.
 
-**CV Page 1 rule:** The FIRST bullet of the FIRST experience position MUST be 2L (not 3L). A 3L first bullet pushes content below the page 1 fold, wasting prime real estate. Plan this during Phase 1 bullet planning — if the top-priority achievement needs 3L, make it the SECOND bullet and lead with a strong 2L bullet instead.
-
-**Budget workflow:** The line budget is pre-calculated from your template. Do NOT recalculate. Use the bullet counts above directly. After generation, verify that total bullet rendered lines = 45 (count each bullet's rendered lines and sum).
+**Budget workflow:** Plan bullet allocation per position BEFORE generating. After generation, verify that total rendered lines stay under 38 (leaving ~1 inch margins). Use `python3 resume_builder/helpers/char_count.py -f resume output/resume.tex` to verify.
 
 ---
 
@@ -181,20 +144,19 @@ The exact line budget depends on your template's FIXED sections (publications, p
 
 **DO NOT use pre-written bullets.** Write every bullet FRESH from experience files, reframed for the target JD.
 
-**Required files:** Experience files (all) + achievement_reframing_guide.md + bundle Section 1 (Priority Matrix) + bundle Section 3 (Reframing Map)
+**Required files:** Experience files (detected persona variant) + bundle Section 3 (Reframing Map)
 
 **Protocol:**
-1. Determine document format -> look up bullet variant (Resume-1L/2L, CV-2L/3L) and budget
+1. Determine document format → look up bullet variant (Resume-2L) and 1-page budget (8-10 experience bullets)
 2. Allocate bullet count per position by JD relevance
-3. For each position, consult bundle's **Priority Matrix** (Section 1) to rank achievements
-4. For each achievement, consult **Achievement Reframing Guide** for role-type-specific framing directives
-5. Write the bullet FRESH using target-domain vocabulary from bundle's **Reframing Map** (Section 3)
-6. Verify char count per-bullet BEFORE moving to the next bullet
-7. After all bullets written: run the **First-Pass Reframing Checklist** (in achievement_reframing_guide.md)
+3. For each position, consult bundle's **Reframing Map** (Section 3) to identify target vocabulary and framing angle
+4. Write the bullet FRESH using target-domain vocabulary from the Reframing Map
+5. Verify char count per-bullet BEFORE moving to the next bullet
+6. After all bullets written: tally total bullet count — must equal or fall within 8-10 range
 
-**Reframing during writing (NOT after):** Every bullet should use target-domain vocabulary from the start. Do not write in academic language and then "translate" -- write in target language directly using the Reframing Map. This is the single highest-ROI step: reframing alone moves scores from ~60 to ~85.
+**Reframing during writing (NOT after):** Every bullet should use target-domain vocabulary from the start. Do not write in generic language and then "translate" — write in target language directly using the Reframing Map. This is the single highest-ROI step: reframing alone moves scores from ~60 to ~85.
 
-**Hybrid JDs (two role types):** Use primary role type's Priority Matrix for achievement ranking. Use secondary role type's Reframing Map for 1-2 bullets that bridge to the secondary domain.
+**Persona consistency:** For a DevOps/SRE JD, use `experience_company_devops.md` bullets throughout. For a FullStack/SWE JD, use `experience_company_swe.md` bullets. Never mix personas in a single resume.
 
 ---
 

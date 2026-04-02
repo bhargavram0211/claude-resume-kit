@@ -2,9 +2,9 @@
 
 Most AI resume tools work the same way: paste resume + paste JD, get a rewrite. They don't know which of your papers is published vs. under review. They don't know you only ran the simulations, not the experiments. They'll upgrade "contributed to" into "developed" without blinking.
 
-This is different. You extract your papers, codebases, and reports once — the system asks structured questions about each one. After that, every new application is just pointing it at a JD. It picks the right achievements, frames them for the audience, enforces accuracy, and generates LaTeX you compile locally.
+This is different. You structure your work once — the system asks detailed questions about each achievement, publication status, and technical contribution. After that, every new application is just pointing it at a JD. It detects which role type you're applying for, picks the right achievements, frames them for that audience, enforces accuracy, and generates LaTeX you compile locally.
 
-Built for researchers and engineers with lots of source material (papers, code, reports) who apply to many positions across different employer types.
+Built for researchers (PhDs, faculty candidates) and software engineers (students, mid-career, IC track) with lots of source material (papers, code, projects, professional experience) who apply to many positions across different employer types and role tracks.
 
 ---
 
@@ -24,18 +24,22 @@ Built for researchers and engineers with lots of source material (papers, code, 
 
 ## Example Output
 
-Here's what the system generates for the included fictional researcher (Dr. Jordan Chen, computational biologist) applying to a tenure-track faculty position:
-
+### For Researchers (Academic Track)
+Dr. Jordan Chen, computational biologist, applying to a tenure-track faculty position:
 - [Example Resume (PDF)](resume_builder/examples/example_resume.pdf) — 2-page resume with JD-tailored bullets, skills, and publications
 - [Example Cover Letter (PDF)](resume_builder/examples/example_cover_letter.pdf) — 1-page academic cover letter with specific hooks
 - [Example Session File](resume_builder/examples/example_session_file.md) — the decision log that produced this output
-- [Source .tex files](resume_builder/examples/output/) — the LaTeX source Claude generated
 
-All example data is in `resume_builder/examples/` — extraction, experience file, bundle, config, and session file.
+### For Software Engineers (SWE / DevOps Track)
+Example experience files and project cards in `resume_builder/examples/{experience,projects}/` show how the system frames the same work differently for DevOps/SRE roles vs. FullStack/SWE roles — auto-detecting from the JD and selecting the matching bullet variants.
+
+All example data is in `resume_builder/examples/` — config, experience (academic variant), bundles, and session file. For SWE examples, see the example_experience_swe.md and example_project.md files.
 
 ---
 
 ## What you actually do
+
+### For Researchers (Academic Track)
 
 **One-time setup (~10 min per paper):**
 1. Drop your papers/reports into `knowledge_base/papers/`
@@ -48,7 +52,24 @@ All example data is in `resume_builder/examples/` — extraction, experience fil
 3. Run `/make-cl` for a cover letter
 4. Run `/critique` for a scored review with specific fixes
 
-Each step uses a **separate Claude Code session** for best quality (fresh context = less bias).
+### For Software Engineers (SWE / DevOps Track)
+
+**One-time setup (~20-30 min):**
+1. Run `/swe-setup` — interactive wizard to populate your knowledge base
+   - Personal info (name, email, GitHub, LinkedIn, etc.)
+   - Work experience (positions with achievements framed for both DevOps/SRE and FullStack/SWE roles)
+   - Projects (personal, open-source, hackathon, coursework)
+   - Builds two bundles (DevOps/SRE and FullStack/SWE) with role-specific framing strategies
+
+**Per application (~15-20 min):**
+1. Drop the JD into `JDs/`
+2. Run `/make-resume JDs/target_job.txt` — detects role type (DevOps vs SWE), picks matching bullets, scores projects by relevance, generates `.tex`
+3. Run `/make-cl` for a cover letter
+4. Run `/critique` for a scored review with specific fixes
+
+---
+
+Each skill runs in a **separate Claude Code session** for best quality (fresh context = less bias).
 
 ---
 
@@ -120,6 +141,7 @@ Then in separate sessions: `/make-cl` for the cover letter, `/critique` for a sc
 
 ## How It Works
 
+### Academic (Researcher) Pipeline
 ```
 Your Papers --> /setup-extract --> Extractions --> /setup-build-kb --> Knowledge Base
                                                                           |
@@ -132,14 +154,37 @@ Job Description --> /make-resume --> Tailored Resume/CV (.tex)            |
                    /edit-resume --> Refined Package                       |
 ```
 
-| Skill | Purpose | Input | Output |
-|-------|---------|-------|--------|
-| `/setup-extract` | Extract structured data from a paper | Paper path | `knowledge_base/extractions/*.md` |
-| `/setup-build-kb` | Build KB from extractions | All extractions | `resume_builder/{experience,bundles,support}/` |
-| `/make-resume` | Generate tailored resume or CV | JD path | `output/<Folder>/e2e_*.tex` + session file |
-| `/make-cl` | Generate matching cover letter | Session file | `output/<Folder>/*_cover_letter.tex` |
-| `/edit-resume` | Edit resume/CV/CL from feedback | Session + feedback | Updated `.tex` files |
-| `/critique` | Independent quality review | Session file | `output/<Folder>/critique_*.md` |
+### SWE / DevOps Pipeline
+```
+Positions + Projects --> /swe-setup --> Knowledge Base (2 Persona Variants)
+                            |            - experience_*_devops.md
+                            |            - experience_*_swe.md
+                            |            - projects/*.md
+                            |            - 2 bundles (DevOps + SWE)
+                            v
+Job Description --> /make-resume --> Persona Detection --> Tailored Resume (.tex)
+  (DevOps or SWE)        |                 |               (1-page, auto-selected
+                         |                 |                projects)
+                    /make-cl --> Cover Letter (.tex)
+                         |              v
+                    /critique --> 8-Part Score + AI Scan
+                         |              v
+                    /edit-resume --> Refined Package
+```
+
+---
+
+### Skills Reference
+
+| Skill | Purpose | Input | Output | Track |
+|-------|---------|-------|--------|-------|
+| `/swe-setup` | Build SWE KB from work history | Interactive Q&A | `resume_builder/{experience,bundles,projects,support}/` | SWE |
+| `/setup-extract` | Extract data from papers | Paper PDF/tex | `knowledge_base/extractions/*.md` | Researcher |
+| `/setup-build-kb` | Build researcher KB | All extractions | `resume_builder/{experience,bundles,support}/` | Researcher |
+| `/make-resume` | Generate tailored resume | JD path | `output/<Folder>/e2e_*.tex` + session | Both |
+| `/make-cl` | Generate matching cover letter | Session file | `output/<Folder>/*_cover_letter.tex` | Both |
+| `/edit-resume` | Edit resume/CV/CL from feedback | Session + feedback | Updated `.tex` files | Both |
+| `/critique` | Independent quality review | Session file | `output/<Folder>/critique_*.md` | Both |
 
 ---
 
